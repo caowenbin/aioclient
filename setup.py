@@ -4,7 +4,7 @@ from setuptools import setup, find_packages, Extension
 setup(
     name='aioclient',
     version="0.0.1",
-    keywords=("request client", "asyncio", "python3.6.1"),
+    keywords=("request client", "asyncio", "python3.6"),
     description='',
     long_description="",
     author='caowenbin',
@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-       'Programming Language :: Python :: 3.6.1',
+       'Programming Language :: Python :: 3.6',
     ],
     ext_modules=[
         Extension(
