@@ -3,7 +3,7 @@ from setuptools import setup, find_packages, Extension
 
 setup(
     name='aiohttpclient',
-    version="0.0.2",
+    version="0.0.3",
     keywords=("request client", "asyncio", "python3.6"),
     description='',
     long_description="",

@@ -2,6 +2,7 @@ import asyncio
 import uuid
 from asyncio import BaseEventLoop
 from typing import Union, List
+from urllib import parse
 from urllib.parse import urlencode
 from aioclient.parsers.parser import parse_url
 from aioclient.retries import RetryStrategy
@@ -226,9 +227,13 @@ class Session:
             request_headers['Content-Type'] = 'application/json'
 
         if form is not None:
-            boundary = str(uuid.uuid4()).replace('-', '').encode()
-            body = MultipartEncoder(delimiter=boundary, params=form)
-            request_headers['Content-Type'] = f'multipart/form-data; boundary={boundary.decode()}'
+            content_type = request_headers.get('Content-Type', "multipart/form-data")
+            if "application/x-www-form-urlencoded" in content_type:
+                body = parse.urlencode(form).encode()
+            else:
+                boundary = str(uuid.uuid4()).replace('-', '').encode()
+                body = MultipartEncoder(delimiter=boundary, params=form)
+                request_headers['Content-Type'] = f'{content_type}; boundary={boundary.decode()}'
 
         while True:
             try:
